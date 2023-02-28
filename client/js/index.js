@@ -1,5 +1,5 @@
 const mercadopago = new MercadoPago('TEST-60d51c1b-102c-484b-af6f-b3e31d929e39', { locale: 'pt-BR' });
-const btnCheck = document.getElementById("checkout-btn");
+const btnCheck = document.getElementById("checkout");
 const btnQuant = document.getElementById("quantity");
   
 btnCheck.addEventListener("click", ()=> {
@@ -21,10 +21,7 @@ btnCheck.addEventListener("click", ()=> {
   })
   .then((pagamento) => {
     createCheckoutButton(pagamento.id);
-    $(".shopping-cart").fadeOut(500);
-      setTimeout(() => {
-        $(".container_payment").show(500).fadeIn();
-      }, 500);
+    document.getElementById('sumario').style.display = 'none';
   })
   .catch((err) => {
     alert(`Ocorreu um erro inesperado!, ${err}`);
@@ -38,7 +35,6 @@ function createCheckoutButton(pagamentoId) {
     },
     render: {
       container: '#button-checkout', 
-      label: 'Pagar',
     }
   });
 }
