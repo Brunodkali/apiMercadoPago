@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const path = require('path')
 const cors = require("cors");
-const mercadopago = require ('mercadopago');
+const mercadopago = require('mercadopago');
 
 app.use(express.static("client/"));
 app.use(cors());
