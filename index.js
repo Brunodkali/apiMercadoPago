@@ -4,6 +4,9 @@ const bodyParser = require("body-parser");
 const path = require('path')
 const cors = require("cors");
 const mercadopago = require ('mercadopago');
+require('dotenv').config();
+
+const PORT = process.env.PORT
 
 app.use(express.static("client/"));
 app.use(cors());
@@ -15,7 +18,7 @@ app.get('/', (req, res)=> {
 });
 
 mercadopago.configure({
-  access_token: 'TEST-7625347247694570-022714-bf7987981577a69b8ce6f3f59614c59e-1056961298'
+  access_token: process.env.ACCESSTOKEN
 });
 
 app.post("/pagamento", (req, res) => {
@@ -47,7 +50,7 @@ app.post("/pagamento", (req, res) => {
 	});
 });
 
-const server = app.listen(3000, ()=>{
+const server = app.listen(PORT || 3000, ()=>{
     console.log('Servidor rodando!');
 });
 
