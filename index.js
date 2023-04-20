@@ -33,9 +33,9 @@ app.post("/pagamento", (req, res) => {
 			}
 		],
 		payer: {
-            name: "Lalo",
+            name: "APRO Lalo",
             surname: "Landa",
-            email: "test_user_36961754@testuser.com",
+            email: "test_user_33467020@testuser.com",
             phone: {
                 area_code: "11",
                 number: 11111111
@@ -61,6 +61,7 @@ app.post("/pagamento", (req, res) => {
 
 	mercadopago.preferences.create(pagamento)
 	.then((response) => {
+		console.log(response.body);
 		res.status(201).json({ id: response.body.id })
 	})
     .catch((err) => {
