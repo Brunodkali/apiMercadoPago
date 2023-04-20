@@ -20,6 +20,7 @@ btnCheck.addEventListener("click", ()=> {
     return response.json();
   })
   .then((pagamento) => {
+    console.log(pagamento)
     createCheckoutButton(pagamento.id);
     document.getElementById('sumario').style.display = 'none';
   })
