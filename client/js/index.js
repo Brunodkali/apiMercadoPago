@@ -12,7 +12,7 @@ btnCheck.addEventListener("click", ()=> {
   fetch("https://https-mp-brunoduarteapi-com.onrender.com/pagamento", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     body: JSON.stringify(dadosPagamento),
   })
