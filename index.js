@@ -61,8 +61,7 @@ app.post("/pagamento", (req, res) => {
 
 	mercadopago.preferences.create(pagamento)
 	.then((response) => {
-		console.log(response.payment_id);
-		res.redirect(response.body.init_point)
+		res.redirect(response.body.id)
 	})
     .catch((err) => {
 		console.log(err);
