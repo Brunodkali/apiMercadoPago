@@ -1,4 +1,4 @@
-const mercadopago = new MercadoPago('TEST-60d51c1b-102c-484b-af6f-b3e31d929e39', { locale: 'pt-BR' });
+const mercadopago = new MercadoPago('APP_USR-5c4239f9-0e8a-42ba-8eb1-920b1183d7f7', { locale: 'pt-BR' });
 const btnCheck = document.getElementById("checkout");
 const btnQuant = document.getElementById("quantity");
   

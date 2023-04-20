@@ -18,7 +18,8 @@ app.get('/', (req, res)=> {
 });
 
 mercadopago.configure({
-  access_token: process.env.ACCESSTOKEN
+  	access_token: "APP_USR-2453313229452572-092911-2df2d24eb035a4c0852f3455a89d1459-1160953381",
+	integrator_id: "dev_24c65fb163bf11ea96500242ac130004"
 });
 
 app.post("/pagamento", (req, res) => {
@@ -28,25 +29,53 @@ app.post("/pagamento", (req, res) => {
 				title: req.body.description,
 				unit_price: Number(req.body.price),
 				quantity: Number(req.body.quantity),
+				description: "Tenis da Abibas",
 			}
 		],
+		payer: {
+            name: "Lalo",
+            surname: "Landa",
+            email: "test_user_36961754@testuser.com",
+            phone: {
+                area_code: "11",
+                number: 11111111
+            },
+            identification: {
+                type: "DNI",
+                number: "7777777"
+            },
+            address: {
+                street_name: "Street Groover",
+                street_number: 321,
+                zip_code: "0101"
+            }
+        },
 		back_urls: {
-			"success": "#",
-			"failure": "#",
-			"pending": "#"
+			"success": "/feedback",
+			"failure": "/feedback",
+			"pending": "/feedback"
 		},
+		notification_url: "/feedback",
 		auto_return: "approved",
 	};
 
 	mercadopago.preferences.create(pagamento)
 	.then((response) => {
-		res.status(200).json({
-			id: response.body.id,
-		});
+		console.log(response.payment_id);
+		res.redirect(response.body.init_point)
 	})
     .catch((err) => {
 		console.log(err);
 		res.status(500).send("Erro ao criar pagamento");
+	});
+});
+
+app.get('/resposta', function (req, res) {
+	console.log(req.query)
+	res.json({
+		Payment: req.query.payment_id,
+		Status: req.query.status,
+		MerchantOrder: req.query.merchant_order_id
 	});
 });
 
