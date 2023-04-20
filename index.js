@@ -51,11 +51,11 @@ app.post("/pagamento", (req, res) => {
             }
         },
 		back_urls: {
-			"success": "/feedback",
-			"failure": "/feedback",
-			"pending": "/feedback"
+			"success": "https://https-mp-brunoduarteapi-com.onrender.com//feedback",
+			"failure": "https://https-mp-brunoduarteapi-com.onrender.com//feedback",
+			"pending": "https://https-mp-brunoduarteapi-com.onrender.com//feedback"
 		},
-		notification_url: "/feedback",
+		notification_url: "https://https-mp-brunoduarteapi-com.onrender.com//feedback",
 		auto_return: "approved",
 	};
 
@@ -70,7 +70,7 @@ app.post("/pagamento", (req, res) => {
 	});
 });
 
-app.get('/resposta', function (req, res) {
+app.get('/feedback', function (req, res) {
 	console.log(req.query)
 	res.json({
 		Payment: req.query.payment_id,

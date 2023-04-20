@@ -9,7 +9,7 @@ btnCheck.addEventListener("click", ()=> {
     price: document.getElementById("unit-price").innerHTML
   };
 
-  fetch("/pagamento", {
+  fetch("https://https-mp-brunoduarteapi-com.onrender.com/pagamento", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
