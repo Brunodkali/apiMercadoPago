@@ -11,21 +11,13 @@ app.use(express.static("client/"));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use((req, res, next) => {
-	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-	res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-	res.setHeader('Access-Control-Allow-Credentials', true);
-  
-	next();
-});
 
 app.get('/', (req, res)=> {
     res.sendFile(path.join(__dirname + '/index.html'))
 });
 
 mercadopago.configure({
-  	access_token: "TEST-2453313229452572-092911-e2a5b87ac71ba0c577c887a3ee599639-1160953381",
+  	access_token: "APP_USR-2453313229452572-092911-2df2d24eb035a4c0852f3455a89d1459-1160953381",
 	integrator_id: "dev_24c65fb163bf11ea96500242ac130004"
 });
 
@@ -71,11 +63,6 @@ app.post("/pagamento", (req, res) => {
             excluded_payment_methods: [
                 {
                     id: "visa"
-                }
-            ],
-            excluded_payment_types: [
-                {
-                    id: "ticket"
                 }
             ],
             installments: 6
