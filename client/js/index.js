@@ -20,22 +20,10 @@ btnCheck.addEventListener("click", ()=> {
     return response.json();
   })
   .then((pagamento) => {
-    console.log(pagamento)
-    createCheckoutButton(pagamento.id);
-    document.getElementById('sumario').style.display = 'none';
+    console.log(pagamento);
+    window.location.href = pagamento.link;
   })
   .catch((err) => {
     alert(`Ocorreu um erro inesperado!, ${err}`);
   });
 });
-  
-function createCheckoutButton(pagamentoId) {
-  mercadopago.checkout({
-    preference: {
-      id: pagamentoId
-    },
-    render: {
-      container: '#button-checkout', 
-    }
-  });
-}

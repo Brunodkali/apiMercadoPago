@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-//const bodyParser = require("body-parser");
 const path = require('path')
 const cors = require("cors");
 const mercadopago = require ('mercadopago');
@@ -70,7 +69,7 @@ app.post("/pagamento", (req, res) => {
 	mercadopago.preferences.create(pagamento)
 	.then((response) => {
 		console.log(response.body);
-		res.redirect(302, response.body.init_point)
+		res.json({ link: response.body.init_point })
 	})
     .catch((err) => {
 		console.log(err);
