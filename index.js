@@ -1,17 +1,25 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const bodyParser = require("body-parser");
+//const bodyParser = require("body-parser");
 const path = require('path')
 const cors = require("cors");
 const mercadopago = require ('mercadopago');
-require('dotenv').config();
 
 const PORT = process.env.PORT
 
 app.use(express.static("client/"));
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+	res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+	res.setHeader('Access-Control-Allow-Credentials', true);
+  
+	next();
+});
 
 app.get('/', (req, res)=> {
     res.sendFile(path.join(__dirname + '/index.html'))
@@ -51,18 +59,18 @@ app.post("/pagamento", (req, res) => {
             }
         },
 		back_urls: {
-			"success": "https://https-mp-brunoduarteapi-com.onrender.com/feedback",
-			"failure": "https://https-mp-brunoduarteapi-com.onrender.com/feedback",
-			"pending": "https://https-mp-brunoduarteapi-com.onrender.com/feedback"
+			"success": "https://mpbrunoduarte.onrender.com/feedback",
+			"failure": "https://mpbrunoduarte.onrender.com/feedback",
+			"pending": "https://mpbrunoduarte.onrender.com/feedback"
 		},
-		notification_url: "https://https-mp-brunoduarteapi-com.onrender.com/feedback",
+		notification_url: "https://mpbrunoduarte.onrender.comfeedback",
 		auto_return: "approved",
 	};
 
 	mercadopago.preferences.create(pagamento)
 	.then((response) => {
 		console.log(response.body);
-		res.status(201).redirect(response.body.init_point)
+		res.redirect(302, response.body.init_point)
 	})
     .catch((err) => {
 		console.log(err);
