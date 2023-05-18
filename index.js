@@ -31,30 +31,33 @@ mercadopago.configure({
 
 app.post("/pagamento", (req, res) => {
     var pagamento = {
+		external_reference: "duartesinformaticaltda@gmail.com",
 		items: [
-			{
+			{	
+				id: 4531,
 				title: req.body.description,
 				unit_price: Number(req.body.price),
 				quantity: Number(req.body.quantity),
-				description: "Tenis da Abibas",
+				description: "Dispositivo de loja de comércio eletrônico móvel",
+				picture_url: 'https://img.quizur.com/f/img5f8e5b745bd285.10956982.jpg?lastEdited=1603165046'
 			}
 		],
 		payer: {
-            name: "APRO Lalo",
+            name: "Lalo",
             surname: "Landa",
             email: "test_user_33467020@testuser.com",
             phone: {
-                area_code: "11",
-                number: 11111111
+                area_code: "27",
+                number: 995026576
             },
             identification: {
-                type: "DNI",
-                number: "7777777"
+                type: "CPF",
+                number: "17268062788"
             },
             address: {
-                street_name: "Street Groover",
-                street_number: 321,
-                zip_code: "0101"
+                street_name: "Rua Falsa",
+                street_number: 123,
+                zip_code: "29060020"
             }
         },
 		back_urls: {
@@ -62,8 +65,21 @@ app.post("/pagamento", (req, res) => {
 			"failure": "https://mpbrunoduarte.onrender.com/feedback",
 			"pending": "https://mpbrunoduarte.onrender.com/feedback"
 		},
-		notification_url: "https://mpbrunoduarte.onrender.comfeedback",
+		notification_url: "https://mpbrunoduarte.onrender.com/feedback",
 		auto_return: "approved",
+		payment_methods: {
+            excluded_payment_methods: [
+                {
+                    id: "visa"
+                }
+            ],
+            excluded_payment_types: [
+                {
+                    id: "ticket"
+                }
+            ],
+            installments: 6
+        }
 	};
 
 	mercadopago.preferences.create(pagamento)
